@@ -1,0 +1,100 @@
+<!doctype html>
+<html>
+	<head>
+		<title>
+		MoonAccordingDate
+		</title>
+		<style>
+		
+			:root{
+			--radius : 100px;
+			}
+		
+			*{
+			margin:0;
+			padding:0;
+			box-sizing:border-box;
+			}
+			
+			.container{
+			display:flex;
+			justify-content:center;
+			align-items:center;
+			height:100vh;
+			background:url("https://images.unsplash.com/photo-1520034475321-cbe63696469a?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+			}
+			.container .MoonAccordingDate{
+			height:100px;
+			width:100px;
+			border-radius:50%;
+			box-shadow:inset var(--radius) 0 #f0f0f0;
+			transform:rotate(200deg);
+		}
+				
+		</style>
+	</head>
+	<body>
+		<div class="container">
+		
+			<div class="MoonAccordingDate">
+				
+			</div>
+		
+		</div>
+		
+		<script>
+			
+			const root = document.querySelector(":root")
+		
+			function generateMoonAccordingDate(){
+				
+				let userDate = prompt("Enter date : ")
+				let date = parseInt(UrduToEnglishNumber(userDate.toString()))
+				console.log(date)
+				if(date <= 15 && date > 0){
+				
+				let MoonAccordingDateRadius = date * 6.68;
+					MoonAccordingDateRadius = (MoonAccordingDateRadius > 100)? 100 : MoonAccordingDateRadius
+				root.style.setProperty("--radius", MoonAccordingDateRadius + "px")
+				
+				}else if(date > 15 && date <=30){
+				
+				let MoonAccordingDateRadius = ((30 - date) * 6.68);
+					MoonAccordingDateRadius = (MoonAccordingDateRadius < 6.68)? 6.68 : MoonAccordingDateRadius
+					
+				root.style.setProperty("--radius", "-" + MoonAccordingDateRadius + "px")
+			
+				}else{
+				
+				root.style.setProperty("--radius","6.68px");
+				
+				
+				}
+				
+			
+			}
+			
+			generateMoonAccordingDate()
+			
+			function UrduToEnglishNumber(urduNumber){
+			
+				const urduNumbers = {}
+				const numbers = ['۰' , '۱','۲','۳','۴','۵','۶','۷','۸','۹']
+				for(i=0;i<numbers.length;i++){
+				
+					urduNumbers[numbers[i]] = i.toString();
+				
+				}
+				
+				const EnglishNumber = urduNumber.replace(/[۰-۹]/g, (matchedValue)=>{
+				return urduNumbers[matchedValue]
+				
+				})
+			
+				return EnglishNumber
+
+			}
+		
+		</script>
+	</body>
+</html>
